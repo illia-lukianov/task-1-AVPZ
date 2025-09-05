@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтерактивний аналіз ринку текстових редакторів</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #f5f5f4; /* stone-100 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 50vh;
+            max-height: 450px;
+        }
+        .nav-btn {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-btn.active {
+            border-bottom-color: #f59e0b; /* amber-500 */
+            color: #1c1917; /* stone-900 */
+        }
+        .product-btn {
+            transition: all 0.3s ease;
+            border: 2px solid #e7e5e4; /* stone-200 */
+        }
+        .product-btn.active, .product-btn:hover {
+            border-color: #f59e0b; /* amber-500 */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body class="text-stone-800">
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-stone-900">Аналіз ринку текстових редакторів</h1>
+            <p class="mt-2 text-lg text-stone-600">Інтерактивний звіт для визначення конкурентних переваг</p>
+        </header>
+
+        <nav class="flex justify-center border-b border-stone-200 mb-10">
+            <button data-target="overview" class="nav-btn active text-lg font-semibold py-3 px-6 text-stone-600">Огляд ринку</button>
+            <button data-target="comparison" class="nav-btn text-lg font-semibold py-3 px-6 text-stone-600">Порівняння</button>
+        </nav>
+
+        <main>
+            <section id="overview" class="content-section">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl font-bold mb-4 text-stone-900">Структура ринку</h2>
+                    <p class="text-stone-600">Ринок систем обробки тексту є висококонкурентним, з чітко вираженими лідерами та великою кількістю нішевих рішень. Цей розділ надає загальний огляд ключових гравців, що допоможе зрозуміти поточний розподіл сил та основні категорії продуктів.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <h3 class="text-2xl font-bold mb-3 text-amber-600">🏆 Лідери ринку</h3>
+                        <p class="mb-4">Ці продукти встановлюють стандарти індустрії завдяки своїй функціональності, ринковій частці та широкому визнанню.</p>
+                        <ul class="space-y-2">
+                            <li class="font-semibold text-lg">Microsoft Word</li>
+                            <li class="font-semibold text-lg">Google Docs</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-2xl font-bold mb-3 text-amber-600">⚔️ Основні конкуренти</h3>
+                        <p class="mb-4">Ця група включає як безкоштовні аналоги, так і спеціалізовані платформи, що пропонують унікальні підходи до роботи з текстом.</p>
+                        <ul class="space-y-2">
+                            <li>LibreOffice Writer</li>
+                            <li>Apple Pages</li>
+                            <li>WPS Office Writer</li>
+                            <li>Notion / Evernote</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="comparison" class="content-section hidden">
+                 <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl font-bold mb-4 text-stone-900">Порівняльний аналіз</h2>
+                    <p class="text-stone-600">Для об'єктивного порівняння ми оцінили кожен продукт за п'ятьма ключовими критеріями. Оберіть продукт зі списку нижче, щоб побачити його детальний профіль та позицію на графіку. Це допоможе візуально оцінити сильні та слабкі сторони кожного рішення.</p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <button class="product-btn active p-4 rounded-lg bg-white" data-product="Microsoft Word">Microsoft Word</button>
+                    <button class="product-btn p-4 rounded-lg bg-white" data-product="Google Docs">Google Docs</button>
+                    <button class="product-btn p-4 rounded-lg bg-white" data-product="LibreOffice Writer">LibreOffice Writer</button>
+                    <button class="product-btn p-4 rounded-lg bg-white" data-product="Apple Pages">Apple Pages</button>
+                    <button class="product-btn p-4 rounded-lg bg-white" data-product="Notion / Evernote">Notion / Evernote</button>
+                    <button class="product-btn p-4 rounded-lg bg-white" data-product="WPS Office Writer">WPS Office Writer</button>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div class="card">
+                       <div class="chart-container">
+                            <canvas id="comparisonChart"></canvas>
+                        </div>
+                    </div>
+                    <div id="editorDetails" class="card min-h-[450px]">
+                        
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productData = {
+                "Microsoft Word": {
+                    description: "Стандарт індустрії, відомий своєю універсальністю та широким спектром функцій для професійної роботи з документами.",
+                    audience: "Корпоративні клієнти, професіонали, студенти",
+                    tasks: "Створення звітів, наукових робіт, офіційних документів, книжкових макетів.",
+                    scores: { "Функціональність": 5, "Колаборація": 3, "Доступність": 2, "Дизайн": 3, "Інноваційність": 2 }
+                },
+                "Google Docs": {
+                    description: "Лідер у сфері хмарної співпраці, що надає можливість спільного редагування в режимі реального часу.",
+                    audience: "Команди, освітні установи, віддалені працівники",
+                    tasks: "Швидка колаборація над спільними проєктами, написання групових робіт, обмін відгуками.",
+                    scores: { "Функціональність": 3, "Колаборація": 5, "Доступність": 5, "Дизайн": 3, "Інноваційність": 3 }
+                },
+                "LibreOffice Writer": {
+                    description: "Потужний безкоштовний аналог, що підтримує відкриті стандарти та дозволяє працювати офлайн.",
+                    audience: "Бюджетні організації, користувачі з обмеженим доступом до інтернету, прихильники відкритих технологій",
+                    tasks: "Безкоштовна альтернатива для офлайн-роботи, створення документів у відкритих форматах.",
+                    scores: { "Функціональність": 4, "Колаборація": 1, "Доступність": 5, "Дизайн": 2, "Інноваційність": 1 }
+                },
+                "Apple Pages": {
+                    description: "Рішення для користувачів екосистеми Apple з акцентом на інтуїтивний дизайн та професійну верстку.",
+                    audience: "Користувачі macOS та iOS, дизайнери, творчі фахівці",
+                    tasks: "Створення візуально привабливих документів, креативних матеріалів, інформаційних бюлетенів.",
+                    scores: { "Функціональність": 3, "Колаборація": 3, "Доступність": 4, "Дизайн": 5, "Інноваційність": 2 }
+                },
+                "WPS Office Writer": {
+                    description: "Легкий і функціональний редактор, популярний на мобільних пристроях та сумісний з форматами Word.",
+                    audience: "Мобільні користувачі, підприємства з обмеженим бюджетом, користувачі в Азії",
+                    tasks: "Робота з документами на мобільних пристроях, швидке створення документів за шаблонами.",
+                    scores: { "Функціональність": 3, "Колаборація": 2, "Доступність": 4, "Дизайн": 3, "Інноваційність": 2 }
+                },
+                "Notion / Evernote": {
+                    description: "Гібридні продукти, що поєднують функції текстового редактора з інструментами для організації знань.",
+                    audience: "Команди розробників, проєктні менеджери, дослідники, студенти",
+                    tasks: "Організація знань, управління проєктами, ведення конспектів, створення баз даних і внутрішніх вікі.",
+                    scores: { "Функціональність": 4, "Колаборація": 4, "Доступність": 3, "Дизайн": 4, "Інноваційність": 5 }
+                }
+            };
+
+            const detailsContainer = document.getElementById('editorDetails');
+            const productButtons = document.querySelectorAll('.product-btn');
+            let activeProduct = 'Microsoft Word';
+            
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            const chartLabels = ['Функціональність', 'Колаборація', 'Доступність', 'Дизайн', 'Інноваційність'];
+            
+            const comparisonChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartLabels,
+                    datasets: [{
+                        label: activeProduct,
+                        data: Object.values(productData[activeProduct].scores),
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                        borderColor: 'rgba(245, 158, 11, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(245, 158, 11, 1)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e7e5e4' },
+                            grid: { color: '#e7e5e4' },
+                            pointLabels: { font: { size: 14 }, color: '#44403c' },
+                            ticks: {
+                                beginAtZero: true,
+                                max: 5,
+                                stepSize: 1,
+                                backdropColor: 'rgba(255, 255, 255, 0.75)',
+                                color: '#78716c'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                             labels: { font: { size: 16 } }
+                        }
+                    }
+                }
+            });
+
+            function updateDetails(productName) {
+                const data = productData[productName];
+                if (data) {
+                    detailsContainer.innerHTML = `
+                        <h3 class="text-2xl font-bold mb-2 text-stone-900">${productName}</h3>
+                        <p class="text-stone-600 mb-6">${data.description}</p>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-bold text-amber-600">Цільова аудиторія</h4>
+                                <p>${data.audience}</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-amber-600">Основні задачі</h4>
+                                <p>${data.tasks}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            function updateChart(productName) {
+                const data = productData[productName];
+                if (data) {
+                    comparisonChart.data.datasets[0].label = productName;
+                    comparisonChart.data.datasets[0].data = Object.values(data.scores);
+                    comparisonChart.update();
+                }
+            }
+            
+            productButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    activeProduct = button.dataset.product;
+                    
+                    productButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    updateChart(activeProduct);
+                    updateDetails(activeProduct);
+                });
+            });
+
+            updateDetails(activeProduct);
+            
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.dataset.target;
+                    
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    contentSections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.remove('hidden');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
